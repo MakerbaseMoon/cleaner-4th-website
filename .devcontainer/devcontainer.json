@@ -10,7 +10,8 @@
 	"mounts": [
 		{ "source": "${localWorkspaceFolder}/public", "target": "/home/node/cleaner-4th-website/public/", "type": "bind" },
 		{ "source": "${localWorkspaceFolder}/build", "target": "/home/node/cleaner-4th-website/build/", "type": "bind" },
-		{ "source": "${localWorkspaceFolder}/.devcontainer", "target": "/home/node/cleaner-4th-website/.devcontainer/", "type": "bind" }
+		{ "source": "${localWorkspaceFolder}/.devcontainer", "target": "/home/node/cleaner-4th-website/.devcontainer/", "type": "bind" },
+		{ "source": "${localWorkspaceFolder}/package.json", "target": "/home/node/cleaner-4th-website/package.json", "type": "bind" }
 	],
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
