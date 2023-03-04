@@ -48,7 +48,7 @@ const Network = () => {
     }
 
     function setSTAData() {
-        let STA_ssid   = document.getElementById('STA_ssid').  value;
+        let STA_ssid   = document.getElementById('STA_ssid').value;
         let STA_passwd = document.getElementById('STA_passwd').value;
 
         console.log(`STA_ssid[${STA_ssid.length}]: ${STA_ssid}, STA_passwd[${STA_passwd.length}]: ${STA_passwd}`);
@@ -59,7 +59,7 @@ const Network = () => {
     }
 
     function setAPData() {
-        let AP_ssid   = document.getElementById('AP_ssid').  value;
+        let AP_ssid   = document.getElementById('AP_ssid').value;
         let AP_passwd = document.getElementById('AP_passwd').value;
 
         console.log(`AP_ssid[${AP_ssid.length}]: ${AP_ssid}, AP_passwd[${AP_passwd.length}]: ${AP_passwd}`);
