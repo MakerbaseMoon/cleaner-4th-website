@@ -41,44 +41,13 @@ jobs:
         run: python3 main.py
 
       - name: Generate Changelog
-        run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
+        run: echo "${{ github.event.head_commit.message }}" > ${{ github.workspace }}-CHANGELOG.txt
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: ${{ github.workspace }}-CHANGELOG.txt
-          name: "Cleaner Website" ${{ github.ref }}
+          name: "Cleaner Website" ${{ github.ref_name }}
           files: website.h
           token: ${{ secrets.TOKEN }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-artifact
-          path: website.h
-          
-  # Add a new job to create a release
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
-          path: website.h
-
-      - name: ls
-        run: ls -al
-
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   if: startsWith(github.ref, 'refs/tags/')
-      #   with:
-      #     name: "Cleaner Website" ${{ github.ref }}
-      #     files: website.h
-      #     token: ${{ secrets.TOKEN }}
