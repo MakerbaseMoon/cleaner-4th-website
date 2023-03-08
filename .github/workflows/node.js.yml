@@ -48,7 +48,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: ${{ github.workspace }}-CHANGELOG.txt
-          name: "Cleaner Website" ${{ github.ref }}
+          name: "Cleaner Website ${{ github.ref }}"
           files: website.h
           token: ${{ secrets.TOKEN }}
 
