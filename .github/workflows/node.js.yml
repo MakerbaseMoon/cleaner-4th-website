@@ -45,36 +45,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - Add feature A
-            - Fix issue B
-          draft: false
-          prerelease: false
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      # Add a new step to upload the website.h file as an asset
-      - name: Upload Website Header
-        uses: actions/upload-artifact@v2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: website Header
-          path: ./website.h
-          
-      # Add a new step to attach the website.h file to the release
-      - name: Attach Website Header to Release
-        id: attach_website_header
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./website.h
-          asset_name: website.h
-          asset_content_type: text/plain
+          files: website.h
+          token: ${{ secrets.TOKEN }}
