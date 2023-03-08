@@ -40,6 +40,18 @@ jobs:
       - name: Run Build to C code
         run: python3 main.py
 
+      - name: Generate Changelog
+        run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
+          name: "Cleaner Website" ${{ github.ref }}
+          files: website.h
+          token: ${{ secrets.TOKEN }}
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -60,9 +72,13 @@ jobs:
           name: my-artifact
           path: website.h
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: website.h
-          token: ${{ secrets.TOKEN }}
+      - name: ls
+        run: ls -al
+
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   with:
+      #     name: "Cleaner Website" ${{ github.ref }}
+      #     files: website.h
+      #     token: ${{ secrets.TOKEN }}
