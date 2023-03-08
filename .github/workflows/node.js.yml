@@ -1,12 +1,9 @@
-name: Node.js CI
+name: "ReactJS build and Update Release"
 
 on:
   push:
     tags:
-      - 'v*' 
-    # branches:
-    #   - main
-    #   - actionTest
+      - 'v*'
 
 jobs:
   build:
