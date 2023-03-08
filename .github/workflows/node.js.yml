@@ -40,6 +40,12 @@ jobs:
       - name: Run Build to C code
         run: python3 main.py
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: website.h
+          
   # Add a new job to create a release
   release:
     needs: build
@@ -47,6 +53,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+          path: website.h
 
       - name: Release
         uses: softprops/action-gh-release@v1
