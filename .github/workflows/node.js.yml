@@ -39,17 +39,18 @@ jobs:
       
       - name: Get commits between tags
         run: |
-          $(git log $(git tag | tail -n 2 | head -n 1)..$( git tag | tail -n 1) --pretty=format:%s) > ${{ github.workspace }}-CHANGELOG.txt
-          
+          for commit in ${{ github.event.commits }}; do
+            echo $commit.message >> commit-messages.txt
+          done
       - name: Get commits between tags
         run: |
-          cat ${{ github.workspace }}-CHANGELOG.txt
+          cat commit-messages.txt
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          body_path: ${{ github.workspace }}-CHANGELOG.txt
+          body_path: commit-messages.txt
           name: "Cleaner Website ${{ github.ref_name }}"
           files: website.h
           token: ${{ secrets.TOKEN }}
