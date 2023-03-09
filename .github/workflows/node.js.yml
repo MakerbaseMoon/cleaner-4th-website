@@ -36,15 +36,10 @@ jobs:
 
       - name: Run Build to C code
         run: python3 main.py
-
-      - name: Get tag names
-        id: tags
-        run: echo ::set-output name=tags::$(git tag --sort version:refname)
       
       - name: Get commits between tags
         run: |
-          tags=(${{ steps.tags.outputs.tags }})
-          git log --pretty=format:%H ${tags[-1]}...${tags[-2]} > ${{ github.workspace }}-CHANGELOG.txt
+          git log $(git tag | tail -n 2 | head -n 1)..$( git tag | tail -n 1) --pretty=format:%s > ${{ github.workspace }}-CHANGELOG.txt
 
       - name: Release
         uses: softprops/action-gh-release@v1
