@@ -39,7 +39,11 @@ jobs:
       
       - name: Get commits between tags
         run: |
-          git log $(git tag | tail -n 2 | head -n 1)..$( git tag | tail -n 1) --pretty=format:%s > ${{ github.workspace }}-CHANGELOG.txt
+          $(git log $(git tag | tail -n 2 | head -n 1)..$( git tag | tail -n 1) --pretty=format:%s) > ${{ github.workspace }}-CHANGELOG.txt
+          
+      - name: Get commits between tags
+        run: |
+          cat ${{ github.workspace }}-CHANGELOG.txt
 
       - name: Release
         uses: softprops/action-gh-release@v1
