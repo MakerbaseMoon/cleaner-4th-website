@@ -86,7 +86,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          body_path: commit-messages.txt
+          body_path: commit_msg.txt
           name: "Cleaner Website ${{ github.ref_name }}"
           files: website.h
           token: ${{ secrets.TOKEN }}
