@@ -16,7 +16,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
+        with:
+          fetch-depth: 0
+          
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -42,8 +44,6 @@ jobs:
           TAG1=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1) | cut -d'-' -f1)
           TAG2=$(git describe --tags)
           COMMIT_RANGE="$TAG1..$TAG2"
-          username="MakerbaseMoon"
-          repository="cleaner-4th-website"
           echo $COMMIT_RANGE
           echo "" > commit_msg.txt
           if [ $(/usr/bin/git log $COMMIT_RANGE --grep="feat:" --pretty=format:"- [%ad]%s ([%an](https://github.com/${{github.repository_owner}}/${{github.event.repository.name}}/commit/%h))" --date=short | wc -l) -gt 0 ]; then
