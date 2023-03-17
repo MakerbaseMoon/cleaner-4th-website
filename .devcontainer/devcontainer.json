@@ -1,0 +1,20 @@
+{
+	"name": "Cleaner ReactJS",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"remoteUser": "node",
+	"mounts": [
+		"source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	],
+	"postCreateCommand": "sudo chown node node_modules && npm install && WATCHPACK_POLLING=true yarn start",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"donjayamanne.githistory",
+				"streetsidesoftware.code-spell-checker",
+				"eamodio.gitlens"
+			]
+		}
+	}
+}
