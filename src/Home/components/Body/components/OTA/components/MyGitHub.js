@@ -7,7 +7,7 @@ import { Tag, FileEarmarkMedical } from 'react-bootstrap-icons';
 const github_owner = "MakerbaseMoon";
 const github_repo  = "cleaner-4th-esp32";
 
-const set_ota_url = "http://cleaner/api/ota/"
+const set_ota_url = "/api/ota/"
 
 const MyGitHub = () => {
     const [gitHubOTAData, setGitHubOTAData] = useState(undefined);
@@ -28,8 +28,8 @@ const MyGitHub = () => {
             setGithubReleasesList(data);
             setGitHubOTAData(data[0]);
         }
-        catch (e) {
-            console.log(e)
+        catch (error) {
+            console.log(`[https://api.github.com/repos/${github_owner}/${github_repo}/releases]error:`, error);
         }
     }
 

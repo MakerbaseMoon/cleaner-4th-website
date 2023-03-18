@@ -28,8 +28,8 @@ const Network = () => {
             console.log("networkInfo:", data);
             setNetworkInfo(data);
         }
-        catch (e) {
-            console.log(e)
+        catch (error) {
+            console.log(`[${get_network_url}]error:`, error);
         }
     }
 
@@ -140,7 +140,7 @@ const Network = () => {
                                                     {
                                                         item.list.map((sItem) => {
                                                             return(
-                                                                <Row>{`${sItem.name}: ${sItem.value}`}</Row>
+                                                                <Row key={sItem.name}>{`${sItem.name}: ${sItem.value}`}</Row>
                                                             )
                                                         })
                                                     }

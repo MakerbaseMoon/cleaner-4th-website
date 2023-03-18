@@ -20,8 +20,8 @@ const Module = () => {
             const data = await response.json();
             console.log("moduleInfo:", data);
             setModuleInfo(data);
-        } catch (e) {
-            console.log(e)
+        } catch(error) {
+            console.log(`[${get_module_url}]error:`, error);
         }
     }
 
