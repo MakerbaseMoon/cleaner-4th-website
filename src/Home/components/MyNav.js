@@ -2,19 +2,22 @@ import { Container, Navbar, Nav, OverlayTrigger, Tooltip } from 'react-bootstrap
 
 import { BatteryFull, Megaphone, Github, Justify, ChatLeftDots } from 'react-bootstrap-icons';
 
-const MyNav = ({ isClickItem, setisClickItem }) => {
+const project_url     = "https://github.com/MakerbaseMoon/cleaner-4th-esp32";
+const discussions_url = "https://github.com/MakerbaseMoon/cleaner-4th-esp32/discussions";
+
+const MyNav = ({ isClickItem, setIsClickItem }) => {
     const endLinks = [
-        {id: 0, herf: "https://github.com/MakerbaseMoon/cleaner-4th-esp32", svg: <Github size={40} />, text: "點我進入 GitHub 總專案"},
-        {id: 1, herf: "https://github.com/MakerbaseMoon/cleaner-4th-esp32/discussions", svg: <ChatLeftDots size={40} />, text: "點我進入 GitHub 問題討論區"},
-        {id: 2, herf: "", svg: <Megaphone    size={40} />, text: "更新通知"},
-        {id: 3, herf: "", svg: <BatteryFull  size={40} />, text: "電池剩餘： 80%"},
+        {id: 0, href: project_url,      svg: <Github       size={40} />, text: "點我進入 GitHub 總專案"},
+        {id: 1, href: discussions_url,  svg: <ChatLeftDots size={40} />, text: "點我進入 GitHub 問題討論區"},
+        {id: 2, href: "",               svg: <Megaphone    size={40} />, text: "更新通知"},
+        {id: 3, href: "",               svg: <BatteryFull  size={40} />, text: "電池剩餘： 80%"},
     ];
     
     function showBarText() {
         if (isClickItem === true) {
-            setisClickItem(false);
+            setIsClickItem(false);
         } else {
-            setisClickItem(true);
+            setIsClickItem(true);
         }
     }
 
@@ -39,16 +42,14 @@ const MyNav = ({ isClickItem, setisClickItem }) => {
                     <Nav className="justify-content-end flex-grow-1 pe-3">
                         {
                             endLinks.map((link) => (
-                                <OverlayTrigger
-                                    key={link.id + 'bottom'}
-                                    placement='bottom'
+                                <OverlayTrigger key={link.id + 'bottom'} placement='bottom'
                                     overlay={
                                         <Tooltip id={link.id + `tooltip-bottom`}>
                                             <span className='h5'>{link.text}</span>
                                         </Tooltip>
                                     }
                                 >
-                                <Nav.Link key={link.id} href={link.herf}>
+                                <Nav.Link key={link.id} href={link.href}>
                                     {link.svg}
                                 </Nav.Link>
                                 </OverlayTrigger>
@@ -57,7 +58,7 @@ const MyNav = ({ isClickItem, setisClickItem }) => {
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-      </Navbar>
+        </Navbar>
     );
 }
 

@@ -6,7 +6,7 @@ import Battery      from './components/Battery';
 
 import { Card, Nav } from 'react-bootstrap/';
 
-const Dashbord = () => {
+const Dashboard = () => {
     const links = [
         // { id: 1, text: 'ESP32狀態面板', item: <EspInfo />},
         { id: 2, text: '控制面板',      item: <MyController /> },
@@ -47,4 +47,4 @@ const Dashbord = () => {
     );
 }
 
-export default Dashbord;
+export default Dashboard;

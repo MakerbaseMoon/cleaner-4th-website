@@ -1,4 +1,4 @@
-import Dashbord from './Dashbord';
+import Dashboard from './Dashboard';
 import Setting  from './Setting';
 import About    from './About';
 import OTA      from './OTA';
@@ -8,44 +8,25 @@ import { HouseHeartFill, CloudArrowUp, Gear, InfoCircle} from 'react-bootstrap-i
 
 import { useState, useEffect } from 'react';
 
-const Bar = ({ isClickItem, setisClickItem, setIbodyCard }) => {
+const Bar = ({ isClickItem, setIsClickItem, setBodyCard }) => {
     const [activeItem, setActiveItem] = useState(undefined);
 
     const links = [
-        { id: 0, svg: <HouseHeartFill size={40} className='pb-2'/>, item: <Dashbord /> },
+        { id: 0, svg: <HouseHeartFill size={40} className='pb-2'/>, item: <Dashboard /> },
         { id: 1, svg: <Gear           size={40} className='pb-2'/>, item: <Setting  /> },
         { id: 2, svg: <CloudArrowUp   size={40} className='pb-2'/>, item: <OTA      /> },
         { id: 3, svg: <InfoCircle     size={40} className='pb-2'/>, item: <About    /> },
     ];
 
     function clickHandler(_item) {
-        setIbodyCard(
+        setBodyCard(
             _item
         );
     }
 
-    const getESPVersion = async () => {
-        try {
-            const response = 
-                await fetch(`/api/esp/verion`, {
-                    method: 'POST'
-                });
-
-            const data = await response.json();
-            console.log("ESP32 Version:", data['version']);
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }
-
-    useEffect(() => {
-        getESPVersion();
-    }, [])
-
     function showText() {
         setActiveItem([
-            "Dashbord",
+            "Dashboard",
             "Setting",
             "OTA Update",
             "About Us",

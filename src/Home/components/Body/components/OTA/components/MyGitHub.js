@@ -127,18 +127,18 @@ const MyGitHub = () => {
                                                                 {
                                                                     file.name.toLowerCase().indexOf("spiffs") !== -1 ? (
                                                                         <Button variant="outline-warning" size="lg" onClick={() => handleButtonClick("spiffs", file)}>
-                                                                          燒入 {file.name}
+                                                                            燒入 {file.name}
                                                                         </Button>
-                                                                      ) : file.name.toLowerCase().indexOf("firmware") !== -1 ? (
+                                                                    ) : file.name.toLowerCase().indexOf("firmware") !== -1 ? (
                                                                         <Button variant="outline-danger" size="lg" onClick={() => handleButtonClick("firmware", file)}>
-                                                                          燒入 {file.name}
+                                                                            燒入 {file.name}
                                                                         </Button>
-                                                                      ) : (
+                                                                    ) : (
                                                                         <ButtonGroup size="lg">
                                                                             <Button variant="outline-primary" onClick={() => handleButtonClick("firmware", file)}>Firmware</Button>
                                                                             <Button variant="outline-primary" onClick={() => handleButtonClick("spiffs", file)}>SPIFFS</Button>
                                                                         </ButtonGroup>
-                                                                      )
+                                                                    )
                                                                 }
                                                             </Col>
                                                         </Row>
