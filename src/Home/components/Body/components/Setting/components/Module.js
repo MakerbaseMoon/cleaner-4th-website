@@ -54,7 +54,11 @@ const Module = () => {
     function setModule() {
         let data = "";
         for(let i = 0; i < moduleNodeList.length; i++) {
-            data += `${moduleNodeList[i].id}=${moduleNodeList[i].value | moduleNodeList[i].placeholder}`;
+            let value = moduleNodeList[i].placeholder;
+            if(moduleNodeList[i].value.length > 0) {
+                value = moduleNodeList[i].value;
+            }
+            data += `${moduleNodeList[i].id}=${value}`;
             if(i < moduleNodeList.length - 1) {
                 data += "&";
             }
