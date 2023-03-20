@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Button, Card, Row, Col, Form, ListGroup } from 'react-bootstrap';
 
-import { Dpad, ArrowUpCircle, ArrowLeftCircle, ArrowRightCircle, ArrowDownCircle, Fan, Robot, ArrowUpCircleFill, ArrowLeftCircleFill, ArrowRightCircleFill, ArrowDownCircleFill} from 'react-bootstrap-icons';
+import { Dpad, ArrowUpCircle, ArrowLeftCircle, ArrowRightCircle, ArrowDownCircle, Fan, Robot} from 'react-bootstrap-icons';
 
 const set_fan_url = "/api/fan/pwm/";
 const set_mode_url = "/api/mode/";
