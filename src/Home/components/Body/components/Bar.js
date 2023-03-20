@@ -6,9 +6,9 @@ import OTA      from './OTA';
 import { Navbar, Nav } from 'react-bootstrap';
 import { HouseHeartFill, CloudArrowUp, Gear, InfoCircle} from 'react-bootstrap-icons';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-const Bar = ({ isClickItem, setIsClickItem, setBodyCard }) => {
+const Bar = ({ isClickItem, setBodyCard }) => {
     const [activeItem, setActiveItem] = useState(undefined);
 
     const links = [

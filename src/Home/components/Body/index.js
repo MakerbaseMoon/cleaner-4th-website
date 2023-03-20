@@ -6,7 +6,7 @@ import Bar      from './components/Bar';
 import { Container, Row, Col } from 'react-bootstrap/';
 
 
-const Body = ({ isClickItem, setIsClickItem }) => {
+const Body = ({ isClickItem }) => {
     const [bodyCard, setBodyCard] = useState(
         <Dashboard />
     );
@@ -15,7 +15,7 @@ const Body = ({ isClickItem, setIsClickItem }) => {
         <Container fluid>
             <Row>
                 <Col xs="auto">
-                    <Bar isClickItem={isClickItem} setIsClickItem={setIsClickItem} setBodyCard={setBodyCard}/>
+                    <Bar isClickItem={isClickItem} setBodyCard={setBodyCard}/>
                 </Col>
                 <Col>
                     {bodyCard}
