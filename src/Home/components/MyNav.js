@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import { Container, Navbar, Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { BatteryFull, Megaphone, Github, Justify, ChatLeftDots } from 'react-bootstrap-icons';
@@ -6,11 +8,37 @@ const project_url     = "https://github.com/MakerbaseMoon/cleaner-4th-esp32";
 const discussions_url = "https://github.com/MakerbaseMoon/cleaner-4th-esp32/discussions";
 
 const MyNav = ({ isClickItem, setIsClickItem }) => {
+    const [electricity, setElectricity] = useState("連線中...");
+
+    const getESPElectricity = async () => {
+        try {
+            const response = 
+                await fetch(`/api/get/battery`, {
+                    method: 'POST'
+                });
+
+            const data = await response.json();
+            console.log("ESP32 Battery electricity:", data['electricity']);
+            setElectricity(`${data['electricity']}%`);
+        }
+        catch(error) {
+            console.log("[/api/get/battery]error:", error);
+        }
+    }
+
+    useEffect(() => {
+        getESPElectricity();
+        setInterval(() => {
+            getESPElectricity();
+        }, 10000);
+
+    }, [])
+
     const endLinks = [
         {id: 0, href: project_url,      svg: <Github       size={40} />, text: "點我進入 GitHub 總專案"},
         {id: 1, href: discussions_url,  svg: <ChatLeftDots size={40} />, text: "點我進入 GitHub 問題討論區"},
         {id: 2, href: "",               svg: <Megaphone    size={40} />, text: "更新通知"},
-        {id: 3, href: "",               svg: <BatteryFull  size={40} />, text: "電池剩餘： 80%"},
+        {id: 3, href: "",               svg: <BatteryFull  size={40} />, text: `電池剩餘： ${electricity}`},
     ];
     
     function showBarText() {
