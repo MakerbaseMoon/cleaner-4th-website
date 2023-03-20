@@ -8,10 +8,7 @@ const set_mode_url = "/api/mode/";
 const set_motor_url = "/api/motor/run/";
 
 const MyController = () => {
-    const [ArrowUpCircleEvent,    setArrowUpCircleEvent   ] = useState(<ArrowUpCircle    id={"arrowUpCircle"   } size={100} onMouseDown={arrowUpCircleMouseDown   } onMouseUp={arrowUpCircleMouseUp   }/>);
-    const [ArrowDownCircleEvent,  setArrowDownCircleEvent ] = useState(<ArrowDownCircle  id={"arrowDownCircle" } size={100} onMouseDown={arrowDownCircleMouseDown } onMouseUp={arrowDownCircleMouseUP }/>);
-    const [ArrowLeftCircleEvent,  setArrowLeftCircleEvent ] = useState(<ArrowLeftCircle  id={"arrowLeftCircle" } size={100} onMouseDown={arrowLeftCircleMouseDown } onMouseUp={arrowLeftCircleMouseUp }/>);
-    const [ArrowRightCircleEvent, setArrowRightCircleEvent] = useState(<ArrowRightCircle id={"arrowRightCircle"} size={100} onMouseDown={arrowRightCircleMouseDown} onMouseUp={arrowRightCircleMouseUp}/>);
+    const [buttonDisable, setButtonDisable] = useState(true);
 
     const [fanValue, setFanValue] = useState(255);
     const [mode, setMode] = useState(1);
@@ -21,41 +18,25 @@ const MyController = () => {
 
     function changeMode() {
         if(mode === 1) {
-            // Control Mode
+            // Change to Control Mode
             setMode(2);
-            sendESP32Data(set_mode_url, 'mode=2');
-        } else if(mode === 2) {
-            // Auto Mode
-            setMode(1);
             sendESP32Data(set_mode_url, 'mode=1');
+            setButtonDisable(false);
+        } else if(mode === 2) {
+            // Change to Auto Mode
+            setMode(1);
+            sendESP32Data(set_mode_url, 'mode=2');
+            setButtonDisable(true);
         } else {
             console.log("OTA disable");
         }
     }
 
-    function arrowUpCircleMouseOver() { setArrowUpCircleEvent( <ArrowUpCircleFill id={"arrowUpCircle"} size={100} onMouseDown={arrowUpCircleMouseDown} onMouseUp={arrowUpCircleMouseUp} /> ); }
-    function arrowUpCircleMouseOut () { setArrowUpCircleEvent( <ArrowUpCircle     id={"arrowUpCircle"} size={100} onMouseDown={arrowUpCircleMouseDown} onMouseUp={arrowUpCircleMouseUp} /> ); }
-
-    function arrowDownCircleMouseOver() { setArrowDownCircleEvent( <ArrowDownCircleFill id={"arrowDownCircle"} size={100} onMouseDown={arrowDownCircleMouseDown} onMouseUp={arrowDownCircleMouseUP} /> ); }
-    function arrowDownCircleMouseOut () { setArrowDownCircleEvent( <ArrowDownCircle     id={"arrowDownCircle"} size={100} onMouseDown={arrowDownCircleMouseDown} onMouseUp={arrowDownCircleMouseUP} /> ); }
-
-    function arrowLeftCircleMouseOver() { setArrowLeftCircleEvent( <ArrowLeftCircleFill id={"arrowLeftCircle"} size={100} onMouseDown={arrowLeftCircleMouseDown} onMouseUp={arrowLeftCircleMouseUp} /> ); }
-    function arrowLeftCircleMouseOut () { setArrowLeftCircleEvent( <ArrowLeftCircle     id={"arrowLeftCircle"} size={100} onMouseDown={arrowLeftCircleMouseDown} onMouseUp={arrowLeftCircleMouseUp} /> ); }
-
-    function arrowRightCircleMouseOver() { setArrowRightCircleEvent( <ArrowRightCircleFill id={"arrowRightCircle"} size={100} onMouseDown={arrowRightCircleMouseDown} onMouseUp={arrowRightCircleMouseUp} /> ); }
-    function arrowRightCircleMouseOut () { setArrowRightCircleEvent( <ArrowRightCircle     id={"arrowRightCircle"} size={100} onMouseDown={arrowRightCircleMouseDown} onMouseUp={arrowRightCircleMouseUp} /> ); }
-
-    function arrowUpCircleMouseDown() { setMotor("run=1"); }
-    function arrowUpCircleMouseUp  () { setMotor("run=0"); }
-
-    function arrowDownCircleMouseDown() { setMotor("run=2"); }
-    function arrowDownCircleMouseUP  () { setMotor("run=0"); }
-
-    function arrowLeftCircleMouseDown() { setMotor("run=3"); }
-    function arrowLeftCircleMouseUp  () { setMotor("run=0");; }
-
+    function motorMouseUp             () { setMotor("run=0"); }
+    function arrowUpCircleMouseDown   () { setMotor("run=1"); }
+    function arrowDownCircleMouseDown () { setMotor("run=2"); }
+    function arrowLeftCircleMouseDown () { setMotor("run=3"); }
     function arrowRightCircleMouseDown() { setMotor("run=4"); }
-    function arrowRightCircleMouseUp  () { setMotor("run=0"); }
 
     function setMotor(data) { sendESP32Data(set_motor_url, data); }
 
@@ -108,36 +89,36 @@ const MyController = () => {
                         </Card>
                     </Col>
 
-                    <Col style={{ width: '26rem' }}  className='mx-auto'>
+                    <Col style={{ width: '29rem' }}  className='mx-auto'>
                         <Card className='text-center mb-3'>
                         <Card.Body>
                             <Card.Title></Card.Title>
                             <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>
-                            <Card.Body>
                                 <Row className='g-4'>
                                     <Col></Col>
-                                    <Col onMouseOver={arrowUpCircleMouseOver} onMouseOut={arrowUpCircleMouseOut}>
-                                        {ArrowUpCircleEvent}
+                                    <Col>
+                                        <Button variant="light" onMouseDown={arrowUpCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowUpCircle size={100}/></Button>
                                     </Col>
                                     <Col></Col>
                                 </Row>
                                 <Row className='g-4'>
-                                    <Col onMouseOver={arrowLeftCircleMouseOver} onMouseOut={arrowLeftCircleMouseOut}>
-                                        {ArrowLeftCircleEvent}
+                                    <Col>
+                                        <Button variant="light" onMouseDown={arrowLeftCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowLeftCircle size={100}/></Button>
                                     </Col>
-                                    <Col></Col>
-                                    <Col onMouseOver={arrowRightCircleMouseOver} onMouseOut={arrowRightCircleMouseOut}>
-                                        {ArrowRightCircleEvent}
+                                    <Col style={{color: 'white'}}>
+                                        <ArrowRightCircle size={100}/>
+                                    </Col>
+                                    <Col>
+                                        <Button variant="light" onMouseDown={arrowRightCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowRightCircle size={100}/></Button>
                                     </Col>
                                 </Row>
                                 <Row className='g-4'>
                                     <Col></Col>
-                                    <Col onMouseOver={arrowDownCircleMouseOver} onMouseOut={arrowDownCircleMouseOut}>
-                                        {ArrowDownCircleEvent}
+                                    <Col>
+                                        <Button variant="light" onMouseDown={arrowDownCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowDownCircle size={100}/></Button>
                                     </Col>
                                     <Col></Col>
                                 </Row>
-                            </Card.Body>
                         </Card.Body>
                         </Card>
                     </Col>
@@ -150,8 +131,8 @@ const MyController = () => {
                                 <Card.Text>
                                     <Fan size={250}/>
                                 </Card.Text>
-                                <Form.Label>5 ~ 255</Form.Label>
-                                <Form.Range min="5" max="255" step="25" id="fan_range" size="lg" onChange={fanOnChange} onMouseUp={sendFanData}/>
+                                <Form.Label>0 ~ 255</Form.Label>
+                                <Form.Range min="0" max="255" step="15" value={fanValue} id="fan_range" size="lg" onChange={fanOnChange} onMouseUp={sendFanData}/>
                             </Card.Body>
                         </Card>
                     </Col>
