@@ -97,25 +97,25 @@ const MyController = () => {
                                 <Row className='g-4'>
                                     <Col></Col>
                                     <Col>
-                                        <Button variant="light" onMouseDown={arrowUpCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowUpCircle size={100}/></Button>
+                                        <Button variant="light" onMouseDown={arrowUpCircleMouseDown} onMouseUp={motorMouseUp} onTouchStart={arrowUpCircleMouseDown} onTouchEnd={motorMouseUp} disabled={buttonDisable}><ArrowUpCircle size={100}/></Button>
                                     </Col>
                                     <Col></Col>
                                 </Row>
                                 <Row className='g-4'>
                                     <Col>
-                                        <Button variant="light" onMouseDown={arrowLeftCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowLeftCircle size={100}/></Button>
+                                        <Button variant="light" onMouseDown={arrowLeftCircleMouseDown} onMouseUp={motorMouseUp} onTouchStart={arrowLeftCircleMouseDown} onTouchEnd={motorMouseUp} disabled={buttonDisable}><ArrowLeftCircle size={100}/></Button>
                                     </Col>
                                     <Col style={{color: 'white'}}>
                                         <ArrowRightCircle size={100}/>
                                     </Col>
                                     <Col>
-                                        <Button variant="light" onMouseDown={arrowRightCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowRightCircle size={100}/></Button>
+                                        <Button variant="light" onMouseDown={arrowRightCircleMouseDown} onMouseUp={motorMouseUp} onTouchStart={arrowRightCircleMouseDown} onTouchEnd={motorMouseUp} disabled={buttonDisable}><ArrowRightCircle size={100}/></Button>
                                     </Col>
                                 </Row>
                                 <Row className='g-4'>
                                     <Col></Col>
                                     <Col>
-                                        <Button variant="light" onMouseDown={arrowDownCircleMouseDown} onMouseUp={motorMouseUp} disabled={buttonDisable}><ArrowDownCircle size={100}/></Button>
+                                        <Button variant="light" onMouseDown={arrowDownCircleMouseDown} onMouseUp={motorMouseUp} onTouchStart={arrowDownCircleMouseDown} onTouchEnd={motorMouseUp} disabled={buttonDisable}><ArrowDownCircle size={100}/></Button>
                                     </Col>
                                     <Col></Col>
                                 </Row>
@@ -132,7 +132,7 @@ const MyController = () => {
                                     <Fan size={250}/>
                                 </Card.Text>
                                 <Form.Label>0 ~ 255</Form.Label>
-                                <Form.Range min="0" max="255" step="15" value={fanValue} id="fan_range" size="lg" onChange={fanOnChange} onMouseUp={sendFanData}/>
+                                <Form.Range min="0" max="255" step="15" value={fanValue} id="fan_range" size="lg" onChange={fanOnChange} onMouseUp={sendFanData} onTouchEnd={sendFanData}/>
                             </Card.Body>
                         </Card>
                     </Col>
